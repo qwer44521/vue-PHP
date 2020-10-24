@@ -11,6 +11,12 @@ use jwt\Jwt;
 
 class Login extends Base
 {
+    /**
+     * 登录系统
+     * @param AdministratorsService $service
+     * @param LoginValidate $validate
+     * @return \think\response\Json
+     */
     public function login(AdministratorsService $service, LoginValidate $validate){
         $params = input("post.");
         if(!$validate->scene('login')->check($params)){
@@ -27,9 +33,7 @@ class Login extends Base
             'uid'=>$admin['id']
         ];
         $jwt = Jwt::CreateToken($data);
-//        return(request()->url());
         return $this->ajaxReturn(Code::SUCCESS,"登陆成功",null,$jwt);
-
     }
     public function loginout(){
         dump(1341);
