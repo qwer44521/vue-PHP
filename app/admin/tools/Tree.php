@@ -33,6 +33,19 @@ class Tree
         return $tree;
     }
 
+    //生成列表数据
+    public function getTreeText($cate , $lefthtml = '— — ' , $pid=0 , $lvl=0, $leftpin=0){
+        $arr=array();
+        foreach ($cate as $v){
+            if($v['pid']==$pid){
+                $v['title']=str_repeat($lefthtml,$lvl).$v['title'];
+                $arr[]=$v;
+                $arr= array_merge($arr,$this->getTreeText($cate,$lefthtml,$v['id'],$lvl+1 , $leftpin+20));
+            }
+        }
+        return $arr;
+    }
+
 
 
 

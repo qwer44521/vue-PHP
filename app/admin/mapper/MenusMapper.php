@@ -30,7 +30,7 @@ class MenusMapper
      */
     public function allShowMenu(){
 
-        return MenusModel::where("hidden",1)->select();
+        return MenusModel::where("hidden",0)->select();
 
     }
 
