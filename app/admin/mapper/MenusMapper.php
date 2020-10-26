@@ -38,6 +38,16 @@ class MenusMapper
         return MenusModel::where($where)->select();
     }
 
+    /**
+     * 添加菜单
+     * @param $data
+     * @return int
+     */
+    public function addMenu($data){
+        $res = (new MenusModel())->insert($data);
+        return $res;
+    }
+
 
 
 

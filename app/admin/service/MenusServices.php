@@ -63,6 +63,24 @@ class MenusServices
 
     }
 
+    public function addMenu($data){
+        $dat = [
+            "pid"          => $data['pid'],
+            "name"         => $data['name'],
+            "title"        => $data['title'],
+            "ico"          => $data['icon'],
+            "createtor_id" => request()->admin['data']->uid,
+            "hidden"       => $data['hidden'],
+            "sort"         => $data['sort'],
+            "redirect"     => $data['redirect'],
+            "component"    =>$data['component'],
+            "path"         =>$data['path'],
+            "c_time"       =>time()
+        ];
+        $res = (new MenusMapper())->addMenu($dat);
+        return $res;
+    }
+
 
 
 }

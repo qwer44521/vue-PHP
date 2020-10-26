@@ -11,6 +11,8 @@ Route::group('/',function (){
     Route::post('loginout',Login::class.'@loginout');
 //    Route::post('addadmin', Administrators::class . "@addAdministrator");
 })->allowCrossDomain();
+
+
 //后台路由组     需要验证
 Route::group('/api',function (){
     Route::get('info', Administrators::class."@getAdminInfo");

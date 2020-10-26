@@ -41,7 +41,15 @@ class Menus extends Base
 
     public function addMenus(){
         $params = input("post.");
-       return $this->ajaxReturn(Code::SUCCESS,"数据请求成功");
+//        return $this->ajaxReturn(Code::SUCCESS,"添加成功",$params);
+        $service = new MenusServices();
+        $res = $service->addMenu($params);
+        if ($res){
+            return $this->ajaxReturn(Code::SUCCESS,"添加成功");
+        }else{
+            return $this->ajaxReturn(Code::ERROR,"添加失败");
+        }
+
     }
 
 
