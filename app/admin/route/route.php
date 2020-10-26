@@ -18,4 +18,5 @@ Route::group('/api',function (){
     Route::get('test', Administrators::class."@test");
     Route::get('authmenu',Menus::class."@getAuthMenu");
     Route::post('addmenu',Menus::class."@addMenus");
+    Route::post('menuselect',Menus::class."@menuSelect");
 })->middleware(\app\middleware\JwtMiddleware::class)->allowCrossDomain();

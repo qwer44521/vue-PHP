@@ -23,7 +23,7 @@ class Menus extends Base
     }
     public function menuSelect(){
         $service = new MenusServices();
-        $res = $service ->allMenus();
+        $res = $service ->MenusSelect();
         return $this->ajaxReturn(Code::SUCCESS,"数据请求成功",$res);
     }
     /**
