@@ -48,6 +48,10 @@ class MenusMapper
         return $res;
     }
 
+    public function getMenu($id){
+        return MenusModel::where('id',$id)->find();
+    }
+
 
 
 

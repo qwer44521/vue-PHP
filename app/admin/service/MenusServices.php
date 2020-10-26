@@ -63,6 +63,11 @@ class MenusServices
 
     }
 
+    /**
+     * 添加菜单
+     * @param $data
+     * @return int
+     */
     public function addMenu($data){
         $dat = [
             "pid"          => $data['pid'],
@@ -79,6 +84,10 @@ class MenusServices
         ];
         $res = (new MenusMapper())->addMenu($dat);
         return $res;
+    }
+    public function getMenu($id){
+        return (new MenusMapper())->getMenu($id);
+
     }
 
 

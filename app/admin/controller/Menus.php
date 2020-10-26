@@ -21,6 +21,14 @@ class Menus extends Base
         $res = $service ->allMenus();
         return $this->ajaxReturn(Code::SUCCESS,"数据请求成功",$res);
     }
+
+    /**
+     * 获取菜单结构
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
     public function menuSelect(){
         $service = new MenusServices();
         $res = $service ->MenusSelect();
@@ -39,6 +47,10 @@ class Menus extends Base
         return $this->ajaxReturn(Code::SUCCESS,"数据请求成功",$res);
     }
 
+    /**
+     * 添加菜单
+     * @return \think\response\Json
+     */
     public function addMenus(){
         $params = input("post.");
 //        return $this->ajaxReturn(Code::SUCCESS,"添加成功",$params);
@@ -50,6 +62,12 @@ class Menus extends Base
             return $this->ajaxReturn(Code::ERROR,"添加失败");
         }
 
+    }
+
+    public function getMenu($id){
+        $service = new MenusServices();
+       $res = $service ->getMenu($id);
+        return $this->ajaxReturn(Code::SUCCESS,"添加成功", $res);
     }
 
 
