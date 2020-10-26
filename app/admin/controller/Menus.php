@@ -21,7 +21,11 @@ class Menus extends Base
         $res = $service ->allMenus();
         return $this->ajaxReturn(Code::SUCCESS,"数据请求成功",$res);
     }
-
+    public function menuSelect(){
+        $service = new MenusServices();
+        $res = $service ->allMenus();
+        return $this->ajaxReturn(Code::SUCCESS,"数据请求成功",$res);
+    }
     /**
      * 根据权限获取菜单
      * @return \think\response\Json
@@ -33,6 +37,11 @@ class Menus extends Base
         $service = new MenusServices();
         $res = $service ->getAdminMenu(request()->admin['data']->uid);
         return $this->ajaxReturn(Code::SUCCESS,"数据请求成功",$res);
+    }
+
+    public function addMenus(){
+        $params = input("post.");
+       return $this->ajaxReturn(Code::SUCCESS,"数据请求成功");
     }
 
 

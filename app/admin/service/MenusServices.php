@@ -26,12 +26,12 @@ class MenusServices
      * @throws \think\db\exception\DbException
      * @throws \think\db\exception\ModelNotFoundException
      */
-//    public function allMenus(){
-//        $res =  $this->mapper ->allMenu();
-//        $tree = new Tree();
-//        $resl = $tree->generateTree($res);
-//        return $resl;
-//    }
+    public function MenusSelect(){
+        $res =  $this->mapper ->allMenu();
+        $tree = new Tree();
+        $resl = $tree->generateTree($res);
+        return $resl;
+    }
     public function allMenus(){
         $res =  $this->mapper ->allMenu();
         $tree = new Tree();
