@@ -64,10 +64,27 @@ class Menus extends Base
 
     }
 
+    /**
+     * 根据id获取单个菜单数据
+     * @param $id
+     * @return \think\response\Json
+     */
     public function getMenu($id){
         $service = new MenusServices();
        $res = $service ->getMenu($id);
-        return $this->ajaxReturn(Code::SUCCESS,"添加成功", $res);
+        return $this->ajaxReturn(Code::SUCCESS,"获取数据成功", $res);
+    }
+
+    public function updateMenu($id){
+        $params = input("post.");
+        $service = new MenusServices();
+       $res = $service->updateMenu($id,$params);
+       if ($res){
+           return $this->ajaxReturn(Code::SUCCESS,"修改数据成功");
+       }else{
+           return $this->ajaxReturn(Code::SUCCESS,"修改数据失败");
+       }
+
     }
 
 

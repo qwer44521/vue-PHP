@@ -48,8 +48,20 @@ class MenusMapper
         return $res;
     }
 
+    /**
+     * 获取单条菜单
+     * @param $id
+     * @return array|\think\Model|null
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
     public function getMenu($id){
         return MenusModel::where('id',$id)->find();
+    }
+
+    public function updateMenu($id,$data){
+        return MenusModel::where('id',$id)->update($data);
     }
 
 

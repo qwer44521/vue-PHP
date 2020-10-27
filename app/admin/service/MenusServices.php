@@ -73,7 +73,7 @@ class MenusServices
             "pid"          => $data['pid'],
             "name"         => $data['name'],
             "title"        => $data['title'],
-            "ico"          => $data['icon'],
+            "icon"          => $data['icon'],
             "createtor_id" => request()->admin['data']->uid,
             "hidden"       => $data['hidden'],
             "sort"         => $data['sort'],
@@ -85,11 +85,37 @@ class MenusServices
         $res = (new MenusMapper())->addMenu($dat);
         return $res;
     }
+
+    /**
+     * 获取单条记录
+     * @param $id
+     * @return array|\think\Model|null
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
     public function getMenu($id){
         return (new MenusMapper())->getMenu($id);
 
     }
 
+    public function updateMenu($id,$data){
+        $dat = [
+            "pid"          => $data['pid'],
+            "name"         => $data['name'],
+            "title"        => $data['title'],
+            "icon"          => $data['icon'],
+            "createtor_id" => request()->admin['data']->uid,
+            "hidden"       => $data['hidden'],
+            "sort"         => $data['sort'],
+            "redirect"     => $data['redirect'],
+            "component"    =>$data['component'],
+            "path"         =>$data['path'],
+            "u_time"       =>time()
+        ];
+        $res = (new MenusMapper())->updateMenu($id,$dat);
+        return $res;
+    }
 
 
 }
