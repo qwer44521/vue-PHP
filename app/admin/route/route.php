@@ -4,6 +4,7 @@
 use app\admin\controller\Administrators;
 use app\admin\controller\Login;
 use app\admin\controller\Menus;
+use app\admin\controller\Roles;
 use think\facade\Route;
 //后台路由组   不需要验证
 Route::group('/',function (){
@@ -23,4 +24,5 @@ Route::group('/api',function (){
     Route::get('menuselect',Menus::class."@menuSelect");
     Route::get('getmenu',Menus::class."@getMenu");
     Route::post('updatemenu',Menus::class."@updateMenu");
+    Route::get('allroles',Roles::class."@allRoles");
 })->middleware(\app\middleware\JwtMiddleware::class)->allowCrossDomain();

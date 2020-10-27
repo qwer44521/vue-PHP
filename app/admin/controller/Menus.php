@@ -4,7 +4,7 @@
 namespace app\admin\controller;
 
 
-use app\admin\service\MenusServices;
+use app\admin\service\MenusService;
 use app\Code;
 
 class Menus extends Base
@@ -17,7 +17,7 @@ class Menus extends Base
      * @throws \think\db\exception\ModelNotFoundException
      */
     public function allMenu(){
-        $service = new MenusServices();
+        $service = new MenusService();
         $res = $service ->allMenus();
         return $this->ajaxReturn(Code::SUCCESS,"数据请求成功",$res);
     }
@@ -30,7 +30,7 @@ class Menus extends Base
      * @throws \think\db\exception\ModelNotFoundException
      */
     public function menuSelect(){
-        $service = new MenusServices();
+        $service = new MenusService();
         $res = $service ->MenusSelect();
         return $this->ajaxReturn(Code::SUCCESS,"数据请求成功",$res);
     }
@@ -42,7 +42,7 @@ class Menus extends Base
      * @throws \think\db\exception\ModelNotFoundException
      */
     public function getAuthMenu(){
-        $service = new MenusServices();
+        $service = new MenusService();
         $res = $service ->getAdminMenu(request()->admin['data']->uid);
         return $this->ajaxReturn(Code::SUCCESS,"数据请求成功",$res);
     }
@@ -54,7 +54,7 @@ class Menus extends Base
     public function addMenus(){
         $params = input("post.");
 //        return $this->ajaxReturn(Code::SUCCESS,"添加成功",$params);
-        $service = new MenusServices();
+        $service = new MenusService();
         $res = $service->addMenu($params);
         if ($res){
             return $this->ajaxReturn(Code::SUCCESS,"添加成功");
@@ -70,14 +70,14 @@ class Menus extends Base
      * @return \think\response\Json
      */
     public function getMenu($id){
-        $service = new MenusServices();
+        $service = new MenusService();
        $res = $service ->getMenu($id);
         return $this->ajaxReturn(Code::SUCCESS,"获取数据成功", $res);
     }
 
     public function updateMenu($id){
         $params = input("post.");
-        $service = new MenusServices();
+        $service = new MenusService();
        $res = $service->updateMenu($id,$params);
        if ($res){
            return $this->ajaxReturn(Code::SUCCESS,"修改数据成功");

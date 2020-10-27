@@ -9,7 +9,7 @@ use app\admin\mapper\MenusMapper;
 use app\admin\mapper\UserHasRolesMapper;
 use app\admin\tools\Tree;
 
-class MenusServices
+class MenusService
 {
     private $mapper;
 
