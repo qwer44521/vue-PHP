@@ -25,4 +25,5 @@ Route::group('/api',function (){
     Route::get('getmenu',Menus::class."@getMenu");
     Route::post('updatemenu',Menus::class."@updateMenu");
     Route::get('allroles',Roles::class."@allRoles");
+    Route::post('addroles',Roles::class."@addRoles");
 })->middleware(\app\middleware\JwtMiddleware::class)->allowCrossDomain();
