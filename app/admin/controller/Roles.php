@@ -30,6 +30,11 @@ class Roles extends Base
 
 
     }
+
+    /**
+     * 添加菜单
+     * @return \think\response\Json
+     */
     public function addRoles(){
         $params = input('post.');
         $service = new RolersService();
@@ -44,5 +49,14 @@ class Roles extends Base
         return $this->ajaxReturn(Code::ERROR,"添加成功");
 
     }
+
+    public function updateRoles(){
+        return $this->ajaxReturn(Code::SUCCESS,"请求成功");
+    }
+
+
+
+
+
 
 }

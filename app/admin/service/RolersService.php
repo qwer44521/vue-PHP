@@ -8,6 +8,7 @@ use app\admin\mapper\AuthMapper;
 use app\admin\mapper\RolersMapper;
 use app\admin\model\AuthModel;
 use app\admin\model\RolesModel;
+use think\Exception;
 use think\facade\Db;
 
 class RolersService
@@ -21,8 +22,9 @@ class RolersService
     }
 
     /**
+     * 添加菜单
      * @param $data
-     * @return \Exception
+     * @return bool
      */
     public function addRoles($data){
         $dat = [
@@ -37,6 +39,9 @@ class RolersService
         Db::startTrans();
         try {
            $role_id = (new RolersMapper())->addRoles($dat);
+           if (!$role_id){
+               throw new Exception("操作失败");
+           }
             $auth = array();
             foreach($data['idm'] as $a_key=>$a_val){
                 $tmp_ary = array(
@@ -46,15 +51,18 @@ class RolersService
                 $auth[] = $tmp_ary;
             }
             $res = (new AuthMapper())->addAuth($auth);
+                if (!$res){
+                    throw new Exception('操作失败');
+                }
             // 提交事务
             Db::commit();
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
             // 回滚事务
             Db::rollback();
-            return $e;
+            return false;
 
         }
-
+        return true;
 
     }
 }

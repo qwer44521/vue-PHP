@@ -11,7 +11,7 @@ Route::group('/',function (){
     Route::post('login', Login::class."@login");
     Route::post('loginout',Login::class.'@loginout');
     Route::post("test",\app\admin\controller\Test::class.'@test');
-//    Route::post('addadmin', Administrators::class . "@addAdministrator");
+//  Route::post('addadmin', Administrators::class . "@addAdministrator");
 })->allowCrossDomain();
 
 
@@ -27,4 +27,5 @@ Route::group('/api',function (){
     Route::post('updatemenu',Menus::class."@updateMenu");
     Route::get('allroles',Roles::class."@allRoles");
     Route::post('addroles',Roles::class."@addRoles");
+    Route::post('updateRoles',Roles::class."@updateRoles");
 })->middleware(\app\middleware\JwtMiddleware::class)->allowCrossDomain();
