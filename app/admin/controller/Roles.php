@@ -16,12 +16,33 @@ class Roles extends Base
      */
     public function allRoles(){
        $service = new RolersService();
-       $res = $service->allRolers();
-       return $this->ajaxReturn(Code::SUCCESS,"获取角色列表成功",$res);
+        try {
+            $res = $service->allRolers();
+
+        }catch (\Exception $exception){
+            return $this->ajaxReturn(Code::ERROR,$exception->getMessage());
+        }
+        if (!$res){
+            return $this->ajaxReturn(Code::ERROR,"暂无数据");
+
+        }
+        return $this->ajaxReturn(Code::SUCCESS,"获取角色列表成功",$res);
+
+
     }
     public function addRoles(){
         $params = input('post.');
-        return $this->ajaxReturn(Code::SUCCESS,"添加角色成功",$params);
+        $service = new RolersService();
+        try {
+            $res = $service->addRoles($params);
+        }catch (\Exception $exception){
+            return $this->ajaxReturn(Code::ERROR,$exception->getMessage());
+        }
+        if (!$res){
+            return $this->ajaxReturn(Code::ERROR,"添加失败");
+        }
+        return $this->ajaxReturn(Code::ERROR,"添加成功");
+
     }
 
 }

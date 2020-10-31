@@ -10,6 +10,7 @@ use think\facade\Route;
 Route::group('/',function (){
     Route::post('login', Login::class."@login");
     Route::post('loginout',Login::class.'@loginout');
+    Route::post("test",\app\admin\controller\Test::class.'@test');
 //    Route::post('addadmin', Administrators::class . "@addAdministrator");
 })->allowCrossDomain();
 

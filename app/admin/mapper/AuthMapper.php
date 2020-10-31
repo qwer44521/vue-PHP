@@ -18,4 +18,8 @@ class AuthMapper
         return $model ->where(['role_id'=>$role_id])->column("rule_id");
 
     }
+
+    public function addAuth($data){
+        return (new AuthModel())->insertAll($data);
+    }
 }
