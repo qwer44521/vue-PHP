@@ -46,7 +46,7 @@ class Roles extends Base
         if (!$res){
             return $this->ajaxReturn(Code::ERROR,"添加失败");
         }
-        return $this->ajaxReturn(Code::ERROR,"添加成功");
+        return $this->ajaxReturn(Code::SUCCESS,"添加成功");
 
     }
 
