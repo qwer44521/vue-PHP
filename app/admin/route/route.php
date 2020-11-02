@@ -17,15 +17,26 @@ Route::group('/',function (){
 
 //后台路由组     需要验证
 Route::group('/api',function (){
+    // 获取登录者的信息
     Route::get('info', Administrators::class."@getAdminInfo");
+    // 获取所有菜单
     Route::get('menus', Menus::class."@allMenu");
+    // 测试路由，开发结束后删除
     Route::get('test', Administrators::class."@test");
+    // 获取权限菜单
     Route::get('authmenu',Menus::class."@getAuthMenu");
+    // 添加菜单
     Route::post('addmenu',Menus::class."@addMenus");
+    // 构建菜单结构
     Route::get('menuselect',Menus::class."@menuSelect");
+    // 获取单个菜单数据
     Route::get('getmenu',Menus::class."@getMenu");
+    // 更新菜单
     Route::post('updatemenu',Menus::class."@updateMenu");
+    // 获取所有角色
     Route::get('allroles',Roles::class."@allRoles");
+    // 添加角色
     Route::post('addroles',Roles::class."@addRoles");
+    // 更新角色
     Route::post('updateRoles',Roles::class."@updateRoles");
 })->middleware(\app\middleware\JwtMiddleware::class)->allowCrossDomain();

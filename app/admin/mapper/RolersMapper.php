@@ -19,8 +19,24 @@ class RolersMapper
     public function allRoles(){
         return (new RolesModel())->select()->toArray();
     }
+
+    /**
+     * 添加角色
+     * @param $data
+     * @return int|string
+     */
     public function addRoles($data){
         return (new RolesModel())->insertGetId($data);
+    }
+
+    /**
+     * 更新角色
+     * @param $id
+     * @param $data
+     * @return RolesModel
+     */
+    public function updateRoles($id,$data){
+        return (new RolesModel())->where('id',$id)->update($data);
     }
 
 

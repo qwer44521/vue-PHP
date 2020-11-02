@@ -13,6 +13,14 @@ class Administrators extends Base
         $res= request()->admin['data']->uid;
         dump($res);
     }
+    public function adminList(){
+        dump(123456);
+    }
+
+
+
+
+
 
     /**
      * 获取个人信息

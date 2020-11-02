@@ -32,7 +32,14 @@ class Tree
         }
         return $tree;
     }
-
+    /**
+     * @param $cate
+     * @param string $lefthtml
+     * @param int $pid
+     * @param int $lvl
+     * @param int $leftpin
+     * @return array
+     */
     //生成列表数据
     public function getTreeText($cate , $lefthtml = '— — ' , $pid=0 , $lvl=0, $leftpin=0){
         $arr=array();

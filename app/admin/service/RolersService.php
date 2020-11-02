@@ -29,7 +29,6 @@ class RolersService
         }
         return $res;
     }
-
     /**
      * 添加菜单
      * @param $data
@@ -51,9 +50,9 @@ class RolersService
            if (!$role_id){
                throw new Exception("操作失败");
            }
-            $auth = array();
-            foreach($data['idm'] as $a_key=>$a_val){
-                $tmp_ary = array(
+           $auth = array();
+           foreach($data['idm'] as $a_key=>$a_val){
+               $tmp_ary = array(
                     'role_id' => $role_id,
                     'rule_id' => $a_val
                 );
@@ -70,6 +69,55 @@ class RolersService
             Db::rollback();
             return false;
 
+        }
+        return true;
+
+    }
+
+    /**
+     * 更新角色权限
+     * @param $id
+     * @param $data
+     * @return bool
+     */
+    public function updateRoles($id,$data){
+        $dat=[
+            'r_name'=>$data['r_name'],
+            'roles'=>$data['roles'],
+            'status' => $data['status'],
+            'more'  => $data['remark']
+        ];
+        //开启事务
+        Db::startTrans();
+        try {
+            $del = (new AuthMapper())->delAuth($id);
+            if (!$del){
+                throw new Exception("操作失败");
+            }
+            $res = (new RolersMapper())->updateRoles($id,$dat);
+            if(!$res){
+                throw new Exception("操作失败");
+
+            }
+            $auth = array();
+            foreach($data['idm'] as $a_key=>$a_val){
+                $tmp_ary = array(
+                    'role_id' => $id,
+                    'rule_id' => $a_val
+                );
+                $auth[] = $tmp_ary;
+            }
+            $res = (new AuthMapper())->addAuth($auth);
+            if (!$res){
+                throw new Exception('操作失败');
+            }
+            //提交事务
+            Db::commit();
+
+        }catch (\Exception $e){
+            // 回滚事务
+            Db::rollback();
+            return false;
         }
         return true;
 

@@ -32,7 +32,7 @@ class Roles extends Base
     }
 
     /**
-     * 添加菜单
+     * 添加角色
      * @return \think\response\Json
      */
     public function addRoles(){
@@ -50,8 +50,18 @@ class Roles extends Base
 
     }
 
-    public function updateRoles(){
-        return $this->ajaxReturn(Code::SUCCESS,"请求成功");
+    public function updateRoles($id){
+        $params = input("post.");
+        $service = new RolersService();
+        try{
+            $res = $service->updateRoles($id,$params);
+        }catch (\Exception $exception){
+            return $this->ajaxReturn(Code::ERROR,$exception->getMessage());
+        }
+        if (!$res){
+            return $this->ajaxReturn(Code::ERROR,"添加失败");
+        }
+        return $this->ajaxReturn(Code::SUCCESS,"角色修改成功",$res);
     }
 
 

@@ -19,7 +19,16 @@ class AuthMapper
 
     }
 
+    /**
+     * 添加权限
+     * @param $data
+     * @return int
+     */
     public function addAuth($data){
         return (new AuthModel())->insertAll($data);
+    }
+public function delAuth($id){
+        return(new AuthModel())->where('role_id',$id)->delete();
+
     }
 }
