@@ -14,14 +14,10 @@ class Administrators extends Base
         dump($res);
     }
     public function adminList(){
-        dump(123456);
+       $service = new AdministratorsService();
+       $res = $service->allAdministrator();
+       return $res;
     }
-
-
-
-
-
-
     /**
      * 获取个人信息
      * @return \think\response\Json
