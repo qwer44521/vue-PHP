@@ -6,14 +6,19 @@ namespace app\admin\controller;
 
 use app\admin\service\AdministratorsService;
 use app\Code;
+use http\Client\Request;
+use PouDuo\IpLocation\IpLocation;
 
 class Administrators extends Base
 {
 
-    public function test(){
-        $res= request()->admin['data']->uid;
-        dump($res);
+    public function test(Request $request)
+    {
+        $IpLocation = new IpLocation();
+        $area = $IpLocation->getlocation($request -> ip());
+        return $area;
     }
+
 
     /**
      * @return array|\think\response\Json

@@ -46,10 +46,6 @@ class AdministratorsService
      * @throws \think\db\exception\ModelNotFoundException
      */
     public function getAdminInfo($id){
-//        $res = Db::name('admin_roles')->alias('a')
-//            ->join("administrators u",'a.uid = u.id')
-//            ->join("roles r",'r.id = role_id' )
-//            ->where('u.id',$id)->find();
         $res = Db::name('administrators')->alias('a')
                 ->join('roles r',"r.id = role_id")
                 ->where('a.id',$id)->find();
@@ -67,14 +63,8 @@ class AdministratorsService
     public function allAdministrator(){
         $res = Db::name('administrators')->alias('a')
             ->join('roles r',"r.id = role_id")
-            ->field("a.id,a.username,a.nickname,a.status")
+            ->field("a.id,a.username,a.nickname,a.status,r.r_name")
             ->select()->toArray();
-//       $res = Db::name('administrators')->alias('a')
-//            -> join('admin_roles r','a.id = r.uid')
-//            -> join('roles o','r.role_id = o.id')
-//           ->field("a.id,r.role_id,username,nickname,a.status")
-//           ->select()->toArray();
-//        $res = (new AdministratorsModel())->roles()->select();
 //        $res = AdministratorsModel::with(["roles" => function($query) {
 //            return $query->field("qs_roles.id, r_name");
 //        }])->field("qs_administrators.id, username")->select()->toArray();
