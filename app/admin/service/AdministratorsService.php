@@ -46,10 +46,13 @@ class AdministratorsService
      * @throws \think\db\exception\ModelNotFoundException
      */
     public function getAdminInfo($id){
-        $res = Db::name('admin_roles')->alias('a')
-            ->join("administrators u",'a.uid = u.id')
-            ->join("roles r",'r.id = role_id' )
-            ->where('u.id',$id)->find();
+//        $res = Db::name('admin_roles')->alias('a')
+//            ->join("administrators u",'a.uid = u.id')
+//            ->join("roles r",'r.id = role_id' )
+//            ->where('u.id',$id)->find();
+        $res = Db::name('administrators')->alias('a')
+                ->join('roles r',"r.id = role_id")
+                ->where('a.id',$id)->find();
         return $res;
 
     }
@@ -62,9 +65,15 @@ class AdministratorsService
      * @throws \think\db\exception\ModelNotFoundException
      */
     public function allAdministrator(){
-       $res = Db::name('administrators')->alias('a')
-            -> join('admin_roles r','a.id = r.uid')
-            -> join('roles o','r.role_id = o.id')->select()->toArray();
+        $res = Db::name('administrators')->alias('a')
+            ->join('roles r',"r.id = role_id")
+            ->field("a.id,a.username,a.nickname,a.status")
+            ->select()->toArray();
+//       $res = Db::name('administrators')->alias('a')
+//            -> join('admin_roles r','a.id = r.uid')
+//            -> join('roles o','r.role_id = o.id')
+//           ->field("a.id,r.role_id,username,nickname,a.status")
+//           ->select()->toArray();
 //        $res = (new AdministratorsModel())->roles()->select();
 //        $res = AdministratorsModel::with(["roles" => function($query) {
 //            return $query->field("qs_roles.id, r_name");

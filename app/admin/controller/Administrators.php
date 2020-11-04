@@ -5,6 +5,7 @@ namespace app\admin\controller;
 
 
 use app\admin\service\AdministratorsService;
+use app\Code;
 
 class Administrators extends Base
 {
@@ -13,10 +14,17 @@ class Administrators extends Base
         $res= request()->admin['data']->uid;
         dump($res);
     }
+
+    /**
+     * @return array|\think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
     public function adminList(){
        $service = new AdministratorsService();
        $res = $service->allAdministrator();
-       return $res;
+     return $this->ajaxReturn(Code::SUCCESS,'获取管理员数据成功',$res);
     }
     /**
      * 获取个人信息
