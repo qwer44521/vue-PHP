@@ -29,6 +29,17 @@ class RolersService
         }
         return $res;
     }
+
+    /**
+     * 管理员列表中获取角色选项
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getRolesAdmin(){
+        return (new RolesModel())->select()->toArray();
+    }
     /**
      * 添加菜单
      * @param $data

@@ -27,8 +27,6 @@ class Roles extends Base
 
         }
         return $this->ajaxReturn(Code::SUCCESS,"获取角色列表成功",$res);
-
-
     }
 
     /**
@@ -50,6 +48,11 @@ class Roles extends Base
 
     }
 
+    /**
+     * 更新角色
+     * @param $id
+     * @return \think\response\Json
+     */
     public function updateRoles($id){
         $params = input("post.");
         $service = new RolersService();

@@ -41,4 +41,6 @@ Route::group('/api',function (){
     Route::post('updateRoles',Roles::class."@updateRoles");
     // 获取管理员列表
     Route::get('administrstor',Administrators::class."@adminList");
+    // 管理员添加页面获取角色列表
+    Route::get('adminroles',Administrators::class."@adminroles");
 })->middleware(\app\middleware\JwtMiddleware::class)->allowCrossDomain();

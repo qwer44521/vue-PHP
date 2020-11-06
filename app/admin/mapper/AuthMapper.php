@@ -6,7 +6,7 @@ namespace app\admin\mapper;
 
 use app\admin\model\AuthModel;
 
-class AuthMapper
+class AuthMapper extends BaseMapper
 {
     /**
      * 根据角色获取权限
@@ -18,7 +18,6 @@ class AuthMapper
         return $model ->where(['role_id'=>$role_id])->column("rule_id");
 
     }
-
     /**
      * 添加权限
      * @param $data
@@ -27,8 +26,5 @@ class AuthMapper
     public function addAuth($data){
         return (new AuthModel())->insertAll($data);
     }
-public function delAuth($id){
-        return(new AuthModel())->where('role_id',$id)->delete();
 
-    }
 }

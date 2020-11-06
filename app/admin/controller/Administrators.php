@@ -5,20 +5,15 @@ namespace app\admin\controller;
 
 
 use app\admin\service\AdministratorsService;
+use app\admin\service\RolersService;
 use app\Code;
-use http\Client\Request;
-use PouDuo\IpLocation\IpLocation;
-
 class Administrators extends Base
 {
 
-    public function test(Request $request)
+    public function test()
     {
-        $IpLocation = new IpLocation();
-        $area = $IpLocation->getlocation($request -> ip());
-        return $area;
-    }
 
+    }
 
     /**
      * @return array|\think\response\Json
@@ -41,6 +36,18 @@ class Administrators extends Base
         return $this->ajaxReturn(1,'数据请求成功',$res);
     }
 
+    /**
+     * 获取角色列表
+     * @return array|\think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function adminroles(){
+        $service = new RolersService();
+        $res = $service->getRolesAdmin();
+        return $this->ajaxReturn(Code::SUCCESS,"角色列表请求成功",$res);
+    }
     /**
      * 添加管理员
      * 目前只是添加临时数据，欧系需要优化 2020-10-10

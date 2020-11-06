@@ -5,7 +5,9 @@ namespace app\admin\service;
 
 
 use app\admin\mapper\AdministratorsMapper;
+use app\admin\mapper\AuthMapper;
 use app\admin\model\AdministratorsModel;
+use app\admin\model\AuthModel;
 use think\facade\Db;
 
 class AdministratorsService
@@ -22,6 +24,8 @@ class AdministratorsService
      * @return int
      */
     public function add_admin($data){
+        $a = new AuthMapper();
+        $a->findBy();
         return  $this->mapper->addAdmin($data);
     }
 
