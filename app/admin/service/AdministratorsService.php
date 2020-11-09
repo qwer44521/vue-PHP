@@ -24,9 +24,17 @@ class AdministratorsService
      * @return int
      */
     public function add_admin($data){
-        $a = new AuthMapper();
-        $a->findBy();
-        return  $this->mapper->addAdmin($data);
+        $dat=[
+            "username" => $data['username'],
+            "password" => password_hash($data['password'],PASSWORD_DEFAULT),
+            "nickname" => $data['nickname'],
+            "avatar"   => "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
+            "ctime"    => time()
+        ];
+        return  $this->mapper->addAdmin($dat);
+    }
+    public function updateAdmin($id,$data){
+
     }
 
     /**

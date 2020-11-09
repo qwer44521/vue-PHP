@@ -45,25 +45,46 @@ class Administrators extends Base
      */
     public function adminroles(){
         $service = new RolersService();
-        $res = $service->getRolesAdmin();
-        return $this->ajaxReturn(Code::SUCCESS,"角色列表请求成功",$res);
+        try {
+            $res = $service->getRolesAdmin();
+        }catch (\Exception $exception){
+            return $this->ajaxReturn(Code::ERROR,$exception->getMessage());
+        }
+       if ($res){
+           return $this->ajaxReturn(Code::SUCCESS,"角色列表请求成功",$res);
+       }
+        return $this->ajaxReturn(Code::ERROR,"角色列表请求失败");
     }
+
     /**
      * 添加管理员
-     * 目前只是添加临时数据，欧系需要优化 2020-10-10
-     * @return int
+     * @return \think\response\Json
      */
     public function addAdministrator(){
-        $params = input(".post");
-        $data=[
-            "username" => 'admin',
-            "password" => password_hash("123456",PASSWORD_DEFAULT),
-            "nickname" => "超级管理员",
-            "avatar"   => "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
-            "ctime"    => time()
-        ];
-        $add_admin = new AdministratorsService();
-        $res = $add_admin->add_admin($data);
-        return $res;
+        $params = input("post.");
+        $service = new AdministratorsService();
+        try {
+            $res = $service->add_admin($params);
+
+        }catch (\Exception $exception){
+            return $this->ajaxReturn(Code::ERROR,$exception->getMessage());
+        }
+        if ($res){
+            return $this->ajaxReturn(Code::SUCCESS,"添加管理员成功");
+        }
+        return $this->ajaxReturn(Code::ERROR,"添加管理员失败");
+
+    }
+    public function updateAdmin($id){
+        $params = input("post.");
+        return $this->ajaxReturn(Code::SUCCESS,"修改管理员信息成功",$id);
+
+    }
+//    public function getAdminByid($id){
+//
+//    }
+    public function avatarUpload(){
+        $files = request()->file('file');
+        return $files;
     }
 }
